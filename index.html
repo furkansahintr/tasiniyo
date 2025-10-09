@@ -233,12 +233,16 @@
       const email = form.email.value.trim();
       const phone = form.phone.value.trim();
       const vehicleType = form.vehicle_type.value;
-      const consent = consentYes.checked;
+      const consentYesChecked = consentYes.checked;
+      const consentNoChecked = document.getElementById("consentNo").checked;
 
       // Tüm alanlar doldurulmuş ve "Evet" seçilmiş mi kontrol et
-      const allFieldsFilled = firstName && lastName && email && phone && vehicleType && consent;
+      const allFieldsFilled = firstName && lastName && email && phone && vehicleType && consentYesChecked;
+      
+      // "Hayır" seçilmişse veya hiçbir şey seçilmemişse buton pasif
+      const consentValid = consentYesChecked && !consentNoChecked;
 
-      if (allFieldsFilled) {
+      if (allFieldsFilled && consentValid) {
         submitButton.disabled = false;
         submitButton.classList.remove("opacity-50", "cursor-not-allowed");
       } else {
@@ -254,6 +258,7 @@
     form.phone.addEventListener("input", updateButtonState);
     form.vehicle_type.addEventListener("change", updateButtonState);
     consentYes.addEventListener("change", updateButtonState);
+    document.getElementById("consentNo").addEventListener("change", updateButtonState);
     
     // İlk durum kontrolü
     updateButtonState();
