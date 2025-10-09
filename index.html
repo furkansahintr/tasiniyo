@@ -221,6 +221,57 @@
     // Daha sonra her 5 saniyede bir tekrarlansın
     setInterval(shake, 5000);
 
+    // Form alanları ve submit butonu kontrolü
+    const form = document.getElementById('driverForm');
+    const submitButton = document.querySelector("button[type='submit']");
+    const consentYes = document.getElementById("consentYes");
+
+    function updateButtonState() {
+      // Tüm zorunlu alanları kontrol et
+      const firstName = form.first_name.value.trim();
+      const lastName = form.last_name.value.trim();
+      const email = form.email.value.trim();
+      const phone = form.phone.value.trim();
+      const vehicleType = form.vehicle_type.value;
+      const consent = consentYes.checked;
+
+      // Tüm alanlar doldurulmuş ve "Evet" seçilmiş mi kontrol et
+      const allFieldsFilled = firstName && lastName && email && phone && vehicleType && consent;
+
+      if (allFieldsFilled) {
+        submitButton.disabled = false;
+        submitButton.classList.remove("opacity-50", "cursor-not-allowed");
+      } else {
+        submitButton.disabled = true;
+        submitButton.classList.add("opacity-50", "cursor-not-allowed");
+      }
+    }
+
+    // Tüm input alanlarına event listener ekle
+    form.first_name.addEventListener("input", updateButtonState);
+    form.last_name.addEventListener("input", updateButtonState);
+    form.email.addEventListener("input", updateButtonState);
+    form.phone.addEventListener("input", updateButtonState);
+    form.vehicle_type.addEventListener("change", updateButtonState);
+    consentYes.addEventListener("change", updateButtonState);
+    
+    // İlk durum kontrolü
+    updateButtonState();
+
+    // Araç görselleri arasına rastgele boşluklar ekle
+    function addRandomSpacing() {
+      const carImages = document.querySelectorAll('.car-image');
+      carImages.forEach((car, index) => {
+        if (index > 0) { // İlk araçtan sonraki araçlar için
+          // 10vw ile 30vw arasında rastgele boşluk
+          const randomGap = Math.random() * 20 + 10;
+          car.style.marginLeft = randomGap + 'vw';
+        }
+      });
+    }
+
+    // Sayfa yüklendiğinde rastgele boşlukları ekle
+    addRandomSpacing();
 
     const SUPABASE_URL = window.env.SUPABASE_URL;
     const SUPABASE_ANON_KEY = window.env.SUPABASE_ANON_KEY;
@@ -291,59 +342,6 @@
         }, 3000);
       }
     });
-
-
-    // Form alanları ve submit butonu kontrolü
-    const form = document.getElementById('driverForm');
-    const submitButton = document.querySelector("button[type='submit']");
-    const consentYes = document.getElementById("consentYes");
-
-    function updateButtonState() {
-      // Tüm zorunlu alanları kontrol et
-      const firstName = form.first_name.value.trim();
-      const lastName = form.last_name.value.trim();
-      const email = form.email.value.trim();
-      const phone = form.phone.value.trim();
-      const vehicleType = form.vehicle_type.value;
-      const consent = consentYes.checked;
-
-      // Tüm alanlar doldurulmuş ve "Evet" seçilmiş mi kontrol et
-      const allFieldsFilled = firstName && lastName && email && phone && vehicleType && consent;
-
-      if (allFieldsFilled) {
-        submitButton.disabled = false;
-        submitButton.classList.remove("opacity-50", "cursor-not-allowed");
-      } else {
-        submitButton.disabled = true;
-        submitButton.classList.add("opacity-50", "cursor-not-allowed");
-      }
-    }
-
-    // Tüm input alanlarına event listener ekle
-    form.first_name.addEventListener("input", updateButtonState);
-    form.last_name.addEventListener("input", updateButtonState);
-    form.email.addEventListener("input", updateButtonState);
-    form.phone.addEventListener("input", updateButtonState);
-    form.vehicle_type.addEventListener("change", updateButtonState);
-    consentYes.addEventListener("change", updateButtonState);
-    
-    // İlk durum kontrolü
-    updateButtonState();
-
-    // Araç görselleri arasına rastgele boşluklar ekle
-    function addRandomSpacing() {
-      const carImages = document.querySelectorAll('.car-image');
-      carImages.forEach((car, index) => {
-        if (index > 0) { // İlk araçtan sonraki araçlar için
-          // 10vw ile 30vw arasında rastgele boşluk
-          const randomGap = Math.random() * 20 + 10;
-          car.style.marginLeft = randomGap + 'vw';
-        }
-      });
-    }
-
-    // Sayfa yüklendiğinde rastgele boşlukları ekle
-    addRandomSpacing();
   </script>
 </body>
 </html>
