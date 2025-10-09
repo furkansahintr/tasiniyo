@@ -306,27 +306,34 @@
           body: JSON.stringify(data)
         });
 
-        const result = await res.json();
-        if (!res.ok) throw result;
-
-        // Başarılı durum
-        submitButton.textContent = 'Gönderildi!';
-        submitButton.classList.remove("bg-black");
-        submitButton.classList.add("bg-green-600");
+        console.log('Response status:', res.status);
         
-        // Formu temizle
-        form.reset();
-        
-        // 3 saniye sonra normal duruma dön
-        setTimeout(() => {
-          submitButton.textContent = 'Gönder';
-          submitButton.classList.remove("bg-green-600");
-          submitButton.classList.add("bg-black");
-          updateButtonState(); // Form durumunu kontrol et
-        }, 3000);
+        // 200-299 arası status kodları başarılı sayılır
+        if (res.status >= 200 && res.status < 300) {
+          // Başarılı durum
+          submitButton.textContent = 'Gönderildi!';
+          submitButton.classList.remove("bg-black");
+          submitButton.classList.add("bg-green-600");
+          
+          // Formu temizle
+          form.reset();
+          
+          // 3 saniye sonra normal duruma dön
+          setTimeout(() => {
+            submitButton.textContent = 'Gönder';
+            submitButton.classList.remove("bg-green-600");
+            submitButton.classList.add("bg-black");
+            updateButtonState(); // Form durumunu kontrol et
+          }, 3000);
+        } else {
+          // HTTP hatası
+          const result = await res.json();
+          console.error('HTTP Error:', result);
+          throw new Error(`HTTP ${res.status}: ${result.message || 'Bilinmeyen hata'}`);
+        }
 
       } catch (err) {
-        console.error(err);
+        console.error('Request failed:', err);
         
         // Başarısız durum
         submitButton.textContent = 'Gönderme Başarısız';
