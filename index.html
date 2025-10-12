@@ -26,126 +26,114 @@
       background-color: #3C4CAB;
       margin: 0;
     }
-    .fixed-marquee-cars {
-      position: fixed;
-      bottom: 24px;
-      width: 100%;
-      overflow: hidden;
-      box-sizing: border-box;
-      padding: 8px 0;
-    }
-
-    .cars-container {
-      display: flex;
-      animation: scroll-cars 15s linear infinite;
-    }
-
-    .car-image {
-      height: 40px;
-      width: auto;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
-
-    @keyframes scroll-cars {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    .fixed-marquee {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background-color: #000;
-      overflow: hidden;
-      white-space: nowrap;
-      box-sizing: border-box;
-      padding: 4px 0;
-    }
-
-    .fixed-marquee span {
-      display: inline-block;
-      white-space: nowrap;
-      color: #fff;
-      font-size: 14px;
-      font-weight: 500;
-      padding-left: 0;
-      animation: scroll-text 120s linear infinite;
-    }
-
-    @keyframes scroll-text {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
   </style>
 </head>
 <body>
-  <div class="flex flex-row max-w-7xl p-5 mx-auto w-full justify-between">
-    <div class="pt-8">
-      <img src="./assets/logo.webp" alt="Logo" class="h-14">
-      <p class="text-[#FFCA28] text-lg font-semibold mt-12 tracking-tight">#En sevilen taşımacılık platformu</p>
-      <h1 class="text-white text-6xl leading-[1.1] font-bold mt-2 tracking-tight">Aracınızı ve zamanınızı <br>gelire dönüştürün!</h1>
-      <p class="text-white/80 text-lg my-6">
+  <div class="flex xl:flex-row flex-col gap-16 max-w-7xl px-5 pb-5 pt-8 md:pt-16 mx-auto w-full justify-between">
+    <div class="flex justify-center items-center flex-col xl:block xl:text-left text-center">
+      <img src="./assets/logo.webp" alt="Logo" class="md:h-14 h-10">
+      <p class="text-[#FFCA28] text-lg font-semibold md:mt-16 mt-12 tracking-tight">#ensevilentasimacilikplatformu</p>
+      <h1 class="text-white md:text-6xl text-4xl leading-[1.1] font-bold mt-2 tracking-tight">Aracınızı ve zamanınızı <br>gelire dönüştürün!</h1>
+      <p class="text-white/80 md:text-lg text-sm my-6">
         Bu eşsiz fırsatı kaçırma! Taşınıyo'ya ilk katılan 100 sürücüden biri ol,<br> 3 ay boyunca yaptığın işlerin tamamını cebine koy!
       </p>
-      <div class="mt-16">
-        <img src="./assets/board.webp" alt="Board" class="w-[40rem]">
-      </div>
+      <button class="bg-[#FFCA28] py-3 px-6 text-center rounded-full text-black font-medium my-6 xl:hidden">Ayrıcalıklı Sürücü Olmak İçin Başvur</button>
+      <img src="./assets/board.webp" alt="Board" class="w-[40rem] xl:mt-16 mt-4 max-w-full">
+      <img src="./assets/cars.webp" alt="cars" class="w-[40rem] md:mt-16 mt-8 max-w-full">
     </div>
-    <div class="pt-16">
-      <img src="./assets/opportunity.webp" alt="Opportunity" class="w-[34rem] opportunity">
-      <form id="driverForm" class="p-8 bg-white rounded-2xl mt-8 flex flex-col gap-3 w-[30rem] mx-auto">
-        <div class="relative">
-          <input
-            type="text"
-            name="first_name"
-            placeholder="Ad"
-            required
-            class="border border-black/10 py-2.5 pl-10 pr-4 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#3C4CAB]"
-          />
-          <i class="ph ph-user text-xl absolute left-3 top-2.5"></i>
+    <div>
+      <img src="./assets/opportunity.webp" alt="Opportunity" class="w-[34rem] opportunity mx-auto">
+      <form id="driverForm" class="p-8 bg-white rounded-2xl mt-6 flex flex-col gap-3 w-[34rem] mx-auto max-w-full">
+        <div class="flex gap-3">
+          <div class="relative flex-1">
+            <input
+              type="text"
+              name="first_name"
+              placeholder="Ad"
+              required
+              class="border border-black/10 py-2.5 pl-10 pr-4 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#3C4CAB]"
+            />
+            <i class="ph ph-user text-xl absolute left-3 top-2.5"></i>
+          </div>
+          <div class="relative flex-1">
+            <input
+              type="text"
+              name="last_name"
+              placeholder="Soyad"
+              required
+              class="border border-black/10 py-2.5 pl-4 pr-4 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#3C4CAB]"
+            />
+          </div>
         </div>
-        <div class="relative">
-          <input
-            type="text"
-            name="last_name"
-            placeholder="Soyad"
-            required
-            class="border border-black/10 py-2.5 pl-10 pr-4 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#3C4CAB]"
-          />
-          <i class="ph ph-user-circle text-xl absolute left-3 top-2.5"></i>
+        <div class="flex gap-3 xl:flex-row flex-col">
+          <div class="relative flex-1">
+            <input
+              type="email"
+              name="email"
+              placeholder="E-posta"
+              required
+              class="border border-black/10 py-2.5 pl-10 pr-4 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#3C4CAB]"
+            />
+            <i class="ph ph-at text-xl absolute left-3 top-2.5"></i>
+          </div>
+          <div class="relative flex-1">
+            <input
+              type="text"
+              name="phone"
+              placeholder="Telefon"
+              required
+              class="border border-black/10 py-2.5 pl-10 pr-4 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#3C4CAB]"
+            />
+            <i class="ph ph-phone text-xl absolute left-3 top-2.5"></i>
+          </div>
         </div>
-        <div class="relative">
-          <input
-            type="email"
-            name="email"
-            placeholder="E-posta"
-            required
-            class="border border-black/10 py-2.5 pl-10 pr-4 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#3C4CAB]"
-          />
-          <i class="ph ph-at text-xl absolute left-3 top-2.5"></i>
-        </div>
-        <div class="relative">
-          <input
-            type="text"
-            name="phone"
-            placeholder="Telefon"
-            required
-            class="border border-black/10 py-2.5 pl-10 pr-4 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#3C4CAB]"
-          />
-          <i class="ph ph-phone text-xl absolute left-3 top-2.5"></i>
-        </div>
-        <div class="relative">
-          <select name="vehicle_type" required class="border border-black/10 py-2.5 pl-10 pr-4 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#3C4CAB] appearance-none bg-white">
-            <option value="">Araç Tipi Seç</option>
-            <option value="motosiklet">Motosiklet</option>
-            <option value="doblo">Doblo</option>
-            <option value="panelvan">Panelvan</option>
-            <option value="kamyonet">Kamyonet</option>
-            <option value="kamyon">Kamyon</option>
-          </select>
-          <i class="ph ph-car-profile text-xl absolute left-3 top-2.5"></i>
-          <i class="ph ph-caret-down text-xl absolute right-3 top-2.5 pointer-events-none"></i>
+        <div class="mt-2">
+          <span class="text-base mb-4 block text-gray-700">Araç Tipi Seçin</span>
+          <div class="grid grid-cols-2 gap-3">
+            <!-- Motosiklet -->
+            <label class="relative cursor-pointer">
+              <input type="radio" name="vehicle_type" value="motosiklet" class="sr-only peer" required>
+              <div class="border-2 border-gray-200 rounded-xl pb-3 hover:border-[#3C4CAB] transition-colors peer-checked:border-[#3C4CAB] peer-checked:bg-[#3C4CAB]/5">
+                <div class="flex flex-col items-center text-center">
+                  <img src="./assets/car1.webp" alt="Motosiklet" class="w-24 h-24 object-contain -mb-2">
+                  <span class="text-sm font-medium text-gray-700 peer-checked:text-[#3C4CAB]">Motosiklet</span>
+                </div>
+              </div>
+            </label>
+            
+            <!-- Minivan -->
+            <label class="relative cursor-pointer">
+              <input type="radio" name="vehicle_type" value="minivan" class="sr-only peer" required>
+              <div class="border-2 border-gray-200 rounded-xl pb-3 hover:border-[#3C4CAB] transition-colors peer-checked:border-[#3C4CAB] peer-checked:bg-[#3C4CAB]/5">
+                <div class="flex flex-col items-center text-center">
+                  <img src="./assets/car2.webp" alt="Minivan" class="w-24 h-24 object-contain -mb-2">
+                  <span class="text-sm font-medium text-gray-700 peer-checked:text-[#3C4CAB]">Minivan</span>
+                </div>
+              </div>
+            </label>
+            
+            <!-- Panelvan -->
+            <label class="relative cursor-pointer">
+              <input type="radio" name="vehicle_type" value="panelvan" class="sr-only peer" required>
+              <div class="border-2 border-gray-200 rounded-xl pb-3 hover:border-[#3C4CAB] transition-colors peer-checked:border-[#3C4CAB] peer-checked:bg-[#3C4CAB]/5">
+                <div class="flex flex-col items-center text-center">
+                  <img src="./assets/car3.webp" alt="Panelvan" class="w-24 h-24 object-contain -mb-2">
+                  <span class="text-sm font-medium text-gray-700 peer-checked:text-[#3C4CAB]">Panelvan</span>
+                </div>
+              </div>
+            </label>
+            
+            <!-- Kamyonet -->
+            <label class="relative cursor-pointer">
+              <input type="radio" name="vehicle_type" value="kamyonet" class="sr-only peer" required>
+              <div class="border-2 border-gray-200 rounded-xl pb-3 hover:border-[#3C4CAB] transition-colors peer-checked:border-[#3C4CAB] peer-checked:bg-[#3C4CAB]/5">
+                <div class="flex flex-col items-center text-center">
+                  <img src="./assets/car4.webp" alt="Kamyonet" class="w-24 h-24 object-contain -mb-2">
+                  <span class="text-sm font-medium text-gray-700 peer-checked:text-[#3C4CAB]">Kamyonet</span>
+                </div>
+              </div>
+            </label>
+          </div>
         </div>
         
         <div class="flex flex-col mt-4 ml-3">
@@ -161,50 +149,11 @@
             </label>
           </div>
         </div>
-        <button type="submit" disabled class="bg-black py-3 px-4 text-center rounded-lg text-white font-medium mt-6 opacity-50 cursor-not-allowed transition-opacity">Gönder</button>
+        <button type="submit" disabled class="bg-[#3C4CAB] py-3 px-4 text-center rounded-lg text-white font-medium mt-6 opacity-50 cursor-not-allowed transition-opacity">Ayrıcalıklı Sürücü Olmak İçin Başvur</button>
       </form>
     </div>
 
   </div>
-  <!-- Araç görselleri marquee -->
-  <div class="fixed-marquee-cars">
-    <div class="cars-container">
-      <img src="./assets/car1.webp" alt="Araç 1" class="car-image">
-      <img src="./assets/car2.webp" alt="Araç 2" class="car-image">
-      <img src="./assets/car3.webp" alt="Araç 3" class="car-image">
-      <img src="./assets/car4.webp" alt="Araç 4" class="car-image">
-      <img src="./assets/car1.webp" alt="Araç 1" class="car-image">
-      <img src="./assets/car2.webp" alt="Araç 2" class="car-image">
-      <img src="./assets/car3.webp" alt="Araç 3" class="car-image">
-      <img src="./assets/car4.webp" alt="Araç 4" class="car-image">
-      <img src="./assets/car1.webp" alt="Araç 1" class="car-image">
-      <img src="./assets/car2.webp" alt="Araç 2" class="car-image">
-      <img src="./assets/car3.webp" alt="Araç 3" class="car-image">
-      <img src="./assets/car4.webp" alt="Araç 4" class="car-image">
-    </div>
-  </div>
-
-  <!-- Metin marquee -->
-  <div class="fixed-marquee">
-    <span>
-      İstanbul, Ankara, İzmir ve Muğla'da Başladık, Çok Yakında Tüm Türkiye'deyiz! &nbsp; 
-      İstanbul, Ankara, İzmir ve Muğla'da Başladık, Çok Yakında Tüm Türkiye'deyiz! &nbsp; 
-      İstanbul, Ankara, İzmir ve Muğla'da Başladık, Çok Yakında Tüm Türkiye'deyiz! &nbsp; 
-      İstanbul, Ankara, İzmir ve Muğla'da Başladık, Çok Yakında Tüm Türkiye'deyiz! &nbsp; 
-      İstanbul, Ankara, İzmir ve Muğla'da Başladık, Çok Yakında Tüm Türkiye'deyiz! &nbsp; 
-      İstanbul, Ankara, İzmir ve Muğla'da Başladık, Çok Yakında Tüm Türkiye'deyiz! &nbsp; 
-      İstanbul, Ankara, İzmir ve Muğla'da Başladık, Çok Yakında Tüm Türkiye'deyiz! &nbsp; 
-      İstanbul, Ankara, İzmir ve Muğla'da Başladık, Çok Yakında Tüm Türkiye'deyiz! &nbsp; 
-      İstanbul, Ankara, İzmir ve Muğla'da Başladık, Çok Yakında Tüm Türkiye'deyiz! &nbsp; 
-      İstanbul, Ankara, İzmir ve Muğla'da Başladık, Çok Yakında Tüm Türkiye'deyiz! &nbsp; 
-      İstanbul, Ankara, İzmir ve Muğla'da Başladık, Çok Yakında Tüm Türkiye'deyiz! &nbsp; 
-      İstanbul, Ankara, İzmir ve Muğla'da Başladık, Çok Yakında Tüm Türkiye'deyiz! &nbsp; 
-      İstanbul, Ankara, İzmir ve Muğla'da Başladık, Çok Yakında Tüm Türkiye'deyiz! &nbsp;
-      İstanbul, Ankara, İzmir ve Muğla'da Başladık, Çok Yakında Tüm Türkiye'deyiz! 
-    </span>
-  </div>
-
-  <script src="./config.js"></script>
   <script>
     const opportunity = document.querySelector('.opportunity');
   
@@ -232,7 +181,11 @@
       const lastName = form.last_name.value.trim();
       const email = form.email.value.trim();
       const phone = form.phone.value.trim();
-      const vehicleType = form.vehicle_type.value;
+      
+      // Radio butonlardan seçili olanı bul
+      const selectedVehicleType = document.querySelector('input[name="vehicle_type"]:checked');
+      const vehicleType = selectedVehicleType ? selectedVehicleType.value : '';
+      
       const consentYesChecked = consentYes.checked;
       const consentNoChecked = document.getElementById("consentNo").checked;
 
@@ -256,7 +209,13 @@
     form.last_name.addEventListener("input", updateButtonState);
     form.email.addEventListener("input", updateButtonState);
     form.phone.addEventListener("input", updateButtonState);
-    form.vehicle_type.addEventListener("change", updateButtonState);
+    
+    // Radio butonlar için event listener ekle
+    const vehicleTypeRadios = document.querySelectorAll('input[name="vehicle_type"]');
+    vehicleTypeRadios.forEach(radio => {
+      radio.addEventListener("change", updateButtonState);
+    });
+    
     consentYes.addEventListener("change", updateButtonState);
     document.getElementById("consentNo").addEventListener("change", updateButtonState);
     
@@ -297,7 +256,7 @@
         last_name: form.last_name.value,
         email: form.email.value,
         phone: form.phone.value,
-        vehicle_type: form.vehicle_type.value
+        vehicle_type: document.querySelector('input[name="vehicle_type"]:checked').value
       };
 
       try {
