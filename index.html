@@ -37,7 +37,7 @@
       <p class="text-white/80 md:text-lg text-xs my-6">
         Bu eşsiz fırsatı kaçırma! Taşınıyo'ya ilk katılan 100 sürücüden biri ol,<br> 3 ay boyunca yaptığın işlerin tamamını cebine koy!
       </p>
-      <button class="bg-[#FFCA28] py-3 px-6 text-center rounded-full text-black font-semibold my-6 xl:hidden">Ayrıcalıklı Sürücü Olmak İçin Başvur</button>
+      <button id="scrollToForm" class="bg-[#FFCA28] py-3 px-6 text-center rounded-full text-black font-semibold my-6 xl:hidden">Ayrıcalıklı Sürücü Olmak İçin Başvur</button>
       <img src="./assets/board2.webp" alt="Board" class="w-[40rem] xl:mt-16 mt-4 max-w-full">
       <img src="./assets/cars.webp" alt="cars" class="w-[40rem] md:mt-16 mt-8 max-w-full">
     </div>
@@ -169,6 +169,16 @@
   
     // Daha sonra her 5 saniyede bir tekrarlansın
     setInterval(shake, 5000);
+
+    // Üstteki butona tıklandığında forma scroll yap
+    const scrollToFormButton = document.getElementById('scrollToForm');
+    scrollToFormButton.addEventListener('click', () => {
+      const form = document.getElementById('driverForm');
+      form.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'center'
+      });
+    });
 
     // Form alanları ve submit butonu kontrolü
     const form = document.getElementById('driverForm');
