@@ -201,6 +201,14 @@
             </label>
           </div>
         </div>
+        <!-- Honeypot ve anti-bot alanları -->
+        <div class="sr-only" aria-hidden="true">
+          <label for="website">Web sitesi</label>
+          <input id="website" type="text" name="website" tabindex="-1" autocomplete="off">
+        </div>
+        <input type="hidden" name="form_started_at" value="">
+        <input type="hidden" name="interaction_count" value="0">
+
         <button type="submit" disabled class="bg-[#3C4CAB] py-3 px-4 text-center rounded-lg text-white font-medium mt-6 opacity-50 cursor-not-allowed transition-opacity">Ayrıcalıklı Sürücü Olmak İçin Başvur</button>
       </form>
     </div>
@@ -236,6 +244,20 @@
     const form = document.getElementById('driverForm');
     const submitButton = document.querySelector("button[type='submit']");
     const consentYes = document.getElementById("consentYes");
+    const HONEYPOT_FIELD_NAME = 'website';
+    let interactionCount = 0;
+
+    // Form yüklenme zamanını işaretle
+    if (form && form.form_started_at) {
+      form.form_started_at.value = String(Date.now());
+    }
+
+    function markInteraction() {
+      interactionCount += 1;
+      if (form && form.interaction_count) {
+        form.interaction_count.value = String(interactionCount);
+      }
+    }
 
     // Email doğrulama fonksiyonu
     function isValidEmail(email) {
@@ -327,6 +349,12 @@
     form.last_name.addEventListener("input", updateButtonState);
     form.email.addEventListener("input", updateButtonState);
     form.phone.addEventListener("input", updateButtonState);
+    // Etkileşim sayacı
+    form.first_name.addEventListener("input", markInteraction);
+    form.last_name.addEventListener("input", markInteraction);
+    form.email.addEventListener("input", markInteraction);
+    form.phone.addEventListener("input", markInteraction);
+    form.addEventListener("focusin", markInteraction);
     
     // Email ve telefon için blur eventi ekle
     form.email.addEventListener("blur", () => validateFieldOnBlur('email'));
@@ -336,6 +364,7 @@
     const vehicleTypeRadios = document.querySelectorAll('input[name="vehicle_type"]');
     vehicleTypeRadios.forEach(radio => {
       radio.addEventListener("change", updateButtonState);
+      radio.addEventListener("change", markInteraction);
     });
     
     consentYes.addEventListener("change", updateButtonState);
@@ -359,15 +388,35 @@
     // Sayfa yüklendiğinde rastgele boşlukları ekle
     addRandomSpacing();
 
-    const SUPABASE_URL = "https://jjaxfkmcihygbqixndqk.supabase.co";
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpqYXhma21jaWh5Z2JxaXhuZHFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg5ODkzNTEsImV4cCI6MjA3NDU2NTM1MX0.NpPBaGbPhksNXpakz0h5rGWd0x8I8qQsUkpoX4zZEoo";
 
     document.getElementById('driverForm').addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const form = e.target;
       const submitButton = document.querySelector("button[type='submit']");
-      
+
+      // Anti-bot kontrolleri
+      const hp = (form[HONEYPOT_FIELD_NAME] && form[HONEYPOT_FIELD_NAME].value || '').trim();
+      const startedAt = Number(form.form_started_at && form.form_started_at.value || 0);
+      const elapsedMs = Date.now() - startedAt;
+      const minElapsedMs = 2500; // minimum 2.5 saniye
+      const minInteractions = 3; // minimum etkileşim sayısı
+
+      if (hp || elapsedMs < minElapsedMs || interactionCount < minInteractions) {
+        // Spam şüphesi: gönderimi engelle
+        submitButton.disabled = true;
+        submitButton.textContent = 'Spam tespit edildi';
+        submitButton.classList.remove("bg-[#3C4CAB]");
+        submitButton.classList.add("bg-red-600", "opacity-50", "cursor-not-allowed");
+        setTimeout(() => {
+          submitButton.textContent = 'Gönder';
+          submitButton.classList.remove("bg-red-600");
+          submitButton.classList.add("bg-[#3C4CAB]");
+          updateButtonState();
+        }, 3000);
+        return;
+      }
+
       // Buton durumunu güncelle - gönderiliyor
       submitButton.disabled = true;
       submitButton.textContent = 'Gönderiliyor...';
@@ -382,28 +431,24 @@
       };
 
       try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/drivers`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-          },
-          body: JSON.stringify(data)
+        const res = await fetch("https://jjaxfkmcihygbqixndqk.functions.supabase.co/tasiniyo-form", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
         });
 
         console.log('Response status:', res.status);
-        
+
         // 200-299 arası status kodları başarılı sayılır
         if (res.status >= 200 && res.status < 300) {
           // Başarılı durum
           submitButton.textContent = 'Gönderildi!';
           submitButton.classList.remove("bg-[#3C4CAB]");
           submitButton.classList.add("bg-green-600");
-          
+
           // Formu temizle
           form.reset();
-          
+
           // 3 saniye sonra normal duruma dön
           setTimeout(() => {
             submitButton.textContent = 'Gönder';
@@ -420,12 +465,12 @@
 
       } catch (err) {
         console.error('Request failed:', err);
-        
+
         // Başarısız durum
         submitButton.textContent = 'Gönderme Başarısız';
         submitButton.classList.remove("bg-[#3C4CAB]");
         submitButton.classList.add("bg-red-600");
-        
+
         // 3 saniye sonra normal duruma dön
         setTimeout(() => {
           submitButton.textContent = 'Gönder';
