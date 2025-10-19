@@ -26,10 +26,36 @@
       background-color: #3C4CAB;
       margin: 0;
     }
+    
+    /* Uyarı stilleri */
+    .field-error {
+      border-color: #ef4444 !important;
+      background-color: #fef2f2 !important;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+    }
+    
+    .field-error::placeholder {
+      color: #dc2626 !important;
+    }
+    
+    .error-message {
+      color: #dc2626;
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+    
+    .error-message.show {
+      display: block;
+    }
+    
+    .field-container {
+      position: relative;
+    }
   </style>
 </head>
 <body>
-  <div class="flex xl:flex-row flex-col gap-16 max-w-7xl px-5 pb-5 pt-8 md:pt-16 mx-auto w-full justify-between">
+  <div class="flex xl:flex-row flex-col gap-16 max-w-[94rem] px-5 pb-5 pt-8 md:pt-16 mx-auto w-full justify-between">
     <div class="flex justify-center items-center flex-col xl:block xl:text-left text-center">
       <img src="./assets/logo.webp" alt="Logo" class="md:h-14 h-10">
       <p class="text-[#FFCA28] text-lg font-semibold md:mt-16 mt-12 tracking-tight">#ensevilentasimacilikplatformu</p>
@@ -38,12 +64,35 @@
         Bu eşsiz fırsatı kaçırma! <br class="md:hidden">Taşınıyo'ya ilk katılan 100 sürücüden biri ol,<br> 3 ay boyunca yaptığın işlerin tamamını cebine koy!
       </p>
       <button id="scrollToForm" class="bg-[#FFCA28] py-3 px-6 text-center rounded-full text-black font-semibold my-6 xl:hidden">Ayrıcalıklı Sürücü Olmak İçin Başvur</button>
-      <img src="./assets/board2.webp" alt="Board" class="w-[40rem] xl:mt-16 mt-4 max-w-full hidden md:block">
-      <img src="./assets/boardMobile.webp" alt="Board Mobile" class="w-56 xl:mt-16 mt-4 max-w-full md:hidden">
-      <img src="./assets/cars.webp" alt="cars" class="w-[40rem] md:mt-16 mt-8 max-w-full">
+      <div class="grid md:grid-cols-2 grid-cols-1 text-left gap-4 mt-8 max-w-sm md:max-w-full lg:max-w-4xl">
+        <div class="rounded-3xl bg-gradient-to-b from-white/15 to-[#5467DA25] p-8 flex flex-col">
+          <img src="./assets/item1.webp" alt="item1" class="h-20 ml-auto -mt-[1rem] -mr-[1rem]">
+          <div class="h-8 w-8 rounded-full bg-[#C2FF85] text-[#3C4CAB] font-bold flex items-center justify-center">1</div>
+          <div class="text-white text-lg leading-[1.1] font-bold mt-3 tracking-tight">Basit ve hızlı başlangıç</div>
+          <div class="text-white/80 text-xs mt-2">Karmaşık süreçler olmadan hemen kazanmaya başla. <br>Hızlı kayıt süreci ve kolay kullanımı olan uygulamamız<br> sayesinde ilk işine birkaç dakika içinde başla.</div>
+        </div>
+        <div class="rounded-3xl bg-gradient-to-b from-white/15 to-[#5467DA25] p-8 flex flex-col">
+          <img src="./assets/item2.webp" alt="item2" class="h-20 ml-auto -mt-[1rem] -mr-[1rem]">
+          <div class="h-8 w-8 rounded-full bg-[#C2FF85] text-[#3C4CAB] font-bold flex items-center justify-center">2</div>
+          <div class="text-white text-lg leading-[1.1] font-bold mt-3 tracking-tight">Yüksek kazanç potansiyeli</div>
+          <div class="text-white/80 text-xs mt-2">Adil komisyon oranlarımız sayesinde, <br>emeğinizin karşılığını fazlasıyla alın. <br>Kazancınızı artırmak tamamen sizin elinizde.</div>
+        </div>
+        <div class="rounded-3xl bg-gradient-to-b from-white/15 to-[#5467DA25] p-8 flex flex-col">
+          <img src="./assets/item3.webp" alt="item3" class="h-20 ml-auto -mt-[1rem] -mr-[1rem]">
+          <div class="h-8 w-8 rounded-full bg-[#C2FF85] text-[#3C4CAB] font-bold flex items-center justify-center">3</div>
+          <div class="text-white text-lg leading-[1.1] font-bold mt-3 tracking-tight">Esnek çalışma saatleri</div>
+          <div class="text-white/80 text-xs mt-2">Programınız tamamen sizin kontrolünüzde. <br>Ne zaman ve ne kadar çalışacağınıza <br>kendiniz karar verin.</div>
+        </div>
+        <div class="rounded-3xl bg-gradient-to-b from-white/15 to-[#5467DA25] p-8 flex flex-col">
+          <img src="./assets/item4.webp" alt="item4" class="h-20 ml-auto -mt-[1rem] -mr-[1rem]">
+          <div class="h-8 w-8 rounded-full bg-[#C2FF85] text-[#3C4CAB] font-bold flex items-center justify-center">4</div>
+          <div class="text-white text-lg leading-[1.1] font-bold mt-3 tracking-tight">Güvenli ve şeffaf sistem</div>
+          <div class="text-white/80 text-xs mt-2 tracking-tight">Taşınıyo, sürücüler için güvenli bir deneyim sunar. Tüm işler platformdan takip edilir, yanlış anlaşılmalar ortadan kalkar. Ücretler net belirlenir, sürücüler güvenli ödeme sistemimizle çalışır.</div>
+        </div>
+      </div>
     </div>
     <div>
-      <img src="./assets/opportunity.webp" alt="Opportunity" class="w-[34rem] opportunity mx-auto">
+      <img src="./assets/opportunity.webp" alt="Opportunity" class="w-[34rem] opportunity mx-auto mt-8">
       <form id="driverForm" class="md:p-8 p-6 bg-white rounded-2xl mt-6 flex flex-col gap-3 w-[34rem] mx-auto max-w-full">
         <div class="flex gap-3">
           <div class="relative flex-1">
@@ -67,7 +116,7 @@
           </div>
         </div>
         <div class="flex gap-3 xl:flex-row flex-col">
-          <div class="relative flex-1">
+          <div class="relative flex-1 field-container">
             <input
               type="email"
               name="email"
@@ -76,16 +125,18 @@
               class="border border-black/10 py-2.5 pl-10 pr-4 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#3C4CAB]"
             />
             <i class="ph ph-at text-xl absolute left-3 top-2.5"></i>
+            <div class="error-message">Geçerli bir e-posta adresi giriniz</div>
           </div>
-          <div class="relative flex-1">
+          <div class="relative flex-1 field-container">
             <input
               type="text"
               name="phone"
-              placeholder="Telefon"
+              placeholder="Telefon (05XX XXX XXXX)"
               required
               class="border border-black/10 py-2.5 pl-10 pr-4 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#3C4CAB]"
             />
             <i class="ph ph-phone text-xl absolute left-3 top-2.5"></i>
+            <div class="error-message">Geçerli bir telefon numarası giriniz (05XX XXX XXXX)</div>
           </div>
         </div>
         <div class="mt-2">
@@ -186,12 +237,47 @@
     const submitButton = document.querySelector("button[type='submit']");
     const consentYes = document.getElementById("consentYes");
 
+    // Email doğrulama fonksiyonu
+    function isValidEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    // Telefon doğrulama fonksiyonu (Türkiye telefon numarası)
+    function isValidPhone(phone) {
+      // Türkiye telefon numarası formatları:
+      // 05XX XXX XXXX (cep telefonu)
+      // +90 5XX XXX XXXX (uluslararası format)
+      // 5XX XXX XXXX (sadece numara)
+      const phoneRegex = /^(\+90\s?)?(0?5\d{2}\s?\d{3}\s?\d{2}\s?\d{2})$/;
+      return phoneRegex.test(phone.replace(/\s/g, ''));
+    }
+
+    // Uyarı göster/gizle fonksiyonları
+    function showFieldError(fieldName, show = true) {
+      const field = form[fieldName];
+      const container = field.closest('.field-container');
+      const errorMessage = container.querySelector('.error-message');
+      
+      if (show) {
+        field.classList.add('field-error');
+        errorMessage.classList.add('show');
+      } else {
+        field.classList.remove('field-error');
+        errorMessage.classList.remove('show');
+      }
+    }
+
     function updateButtonState() {
       // Tüm zorunlu alanları kontrol et
       const firstName = form.first_name.value.trim();
       const lastName = form.last_name.value.trim();
       const email = form.email.value.trim();
       const phone = form.phone.value.trim();
+      
+      // Email ve telefon doğrulaması
+      const emailValid = isValidEmail(email);
+      const phoneValid = isValidPhone(phone);
       
       // Radio butonlardan seçili olanı bul
       const selectedVehicleType = document.querySelector('input[name="vehicle_type"]:checked');
@@ -200,13 +286,14 @@
       const consentYesChecked = consentYes.checked;
       const consentNoChecked = document.getElementById("consentNo").checked;
 
-      // Tüm alanlar doldurulmuş ve "Evet" seçilmiş mi kontrol et
+      // Tüm alanlar doldurulmuş, geçerli email/telefon ve "Evet" seçilmiş mi kontrol et
       const allFieldsFilled = firstName && lastName && email && phone && vehicleType && consentYesChecked;
+      const validationPassed = emailValid && phoneValid;
       
       // "Hayır" seçilmişse veya hiçbir şey seçilmemişse buton pasif
       const consentValid = consentYesChecked && !consentNoChecked;
 
-      if (allFieldsFilled && consentValid) {
+      if (allFieldsFilled && validationPassed && consentValid) {
         submitButton.disabled = false;
         submitButton.classList.remove("opacity-50", "cursor-not-allowed");
       } else {
@@ -215,11 +302,35 @@
       }
     }
 
+    // Blur eventi için doğrulama fonksiyonu
+    function validateFieldOnBlur(fieldName) {
+      const field = form[fieldName];
+      const value = field.value.trim();
+      
+      if (fieldName === 'email') {
+        if (value && !isValidEmail(value)) {
+          showFieldError('email', true);
+        } else {
+          showFieldError('email', false);
+        }
+      } else if (fieldName === 'phone') {
+        if (value && !isValidPhone(value)) {
+          showFieldError('phone', true);
+        } else {
+          showFieldError('phone', false);
+        }
+      }
+    }
+
     // Tüm input alanlarına event listener ekle
     form.first_name.addEventListener("input", updateButtonState);
     form.last_name.addEventListener("input", updateButtonState);
     form.email.addEventListener("input", updateButtonState);
     form.phone.addEventListener("input", updateButtonState);
+    
+    // Email ve telefon için blur eventi ekle
+    form.email.addEventListener("blur", () => validateFieldOnBlur('email'));
+    form.phone.addEventListener("blur", () => validateFieldOnBlur('phone'));
     
     // Radio butonlar için event listener ekle
     const vehicleTypeRadios = document.querySelectorAll('input[name="vehicle_type"]');
