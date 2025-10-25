@@ -52,6 +52,18 @@
     .field-container {
       position: relative;
     }
+    
+    /* Number input spinner'ları gizle */
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    
+    input[type="number"] {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
   </style>
 </head>
 <body>
@@ -64,7 +76,8 @@
         Bu eşsiz fırsatı kaçırma! <br class="md:hidden">Taşınıyo'ya ilk katılan 100 sürücüden biri ol,<br> 3 ay boyunca yaptığın işlerin tamamını cebine koy!
       </p>
       <button id="scrollToForm" class="bg-[#FFCA28] py-3 px-6 text-center rounded-full text-black font-semibold my-6 xl:hidden">Ayrıcalıklı Sürücü Olmak İçin Başvur</button>
-      <img src="./assets/brand.webp" alt="Brand" class="w-full mt-12">
+      <img src="./assets/brand.webp" alt="Brand" class="w-full mt-12 hidden md:block">
+      <img src="./assets/brandMobile.webp" alt="Brand Mobile" class="w-full mt-8 md:hidden max-w-xl">
     </div>
     <div>
       <img src="./assets/opportunity.webp" alt="Opportunity" class="w-[34rem] opportunity mx-auto mt-8">
